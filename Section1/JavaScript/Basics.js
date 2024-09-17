@@ -173,3 +173,5 @@ console.log("Human Resources allowance=", hra)
 console.log("Dearness allowance", da)
 var gross = bs + hra + da
 console.log("Gross Salary=", gross)
+
+

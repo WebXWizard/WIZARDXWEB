@@ -43,3 +43,46 @@ console.log("---------------------------")
 for (let k in person) {
     console.log(k,":", person[k])
 }
+
+console.log("---------------------------")
+
+   
+
+// Array Methods----
+
+console.log(fruits.length)
+
+fruits.push('Strawberry')
+console.log(fruits)
+
+fruits.pop()
+console.log(fruits)
+
+fruits.shift()
+console.log(fruits)
+
+fruits.unshift('Apple')
+console.log(fruits)
+
+let veg = ['Potato', 'Tomato', 'Onion', 'Carrot', 'Cabbage']
+let newArray = veg.concat(fruits)
+console.log(newArray)
+
+let index = fruits.indexOf('Mango')
+console.log(index)
+
+
+
+//Loop Question--
+
+let fr=['Apple','Banana','Mango','Orange','Pineapple','Papaya','Guava','Lichi']
+  for(let i=0;i<fr.length;i++)
+  {
+    console.log(fr[i]);
+  }
+  console.log(fr);
+
+
+  console.log(fr);
+
+     
