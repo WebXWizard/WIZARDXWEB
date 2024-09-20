@@ -99,3 +99,19 @@ if (age_2 >= 18) {
 } else {
     console.log("You can't vote")
 }
+
+console.log("---------------------------")
+
+
+
+//Ternary Operator -- 
+let age2 = 18;
+let message = age2 >= 18 ? "You can Vote" : "You can't Vote"
+console.log(message)
+
+console.log("---------------------------")
+
+
+let age3 = 18;
+let message2 = age3 < 18 ? "You are minor" : age3>=18 && age3<60 ? "You are an Adult" : "You are Senior" 
+console.log(message2)

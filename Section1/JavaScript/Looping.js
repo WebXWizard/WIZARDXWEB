@@ -19,7 +19,8 @@ for (let i = 0; i<5; i++) {
     console.log("John")
 }
 
-// for of loop
+// for of loop -- array with String
+
 let names = ["John", "Smith", "Sam"]
 for (let name of names) {
     console.log(name, "is a good human")
@@ -27,7 +28,7 @@ for (let name of names) {
 
 console.log("---------------------------")
 
-// for in loop
+// for in loop  -- Key value pair 
 let person = {
     name: "John",
     age: 30,
