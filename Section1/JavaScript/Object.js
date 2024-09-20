@@ -95,5 +95,3 @@ console.log(phones)
 
 
 
-
-//C:\Users\hp\Desktop\WIZARDXWEB>npm uninstall create-next-app -g
