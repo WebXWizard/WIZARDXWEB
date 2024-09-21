@@ -1,3 +1,4 @@
+// Basics of JavaScript- 
 console.log("Hello from My Side");
 console.log("Hello from My Side");
 console.log("Hello from My Side");
@@ -22,20 +23,20 @@ console.log(b)
 // console.log(c)
 
 var x = 30
-// Redeclaration is possible in var
+// Re declaration is possible in var
 var x = 40
 // Reassign is possible in var
 x = 50
 console.log(x)
 
 let y = 30
-// Redeclaration is not possible in let
+// Re declaration is not possible in let
 // let y = 40
 // Reassign is possible in let
 y = 50
 console.log(y)
 
-// redeclaration and reassignment is not possible in const
+// Re declaration and reassignment is not possible in const
 
 console.log("---------------------------")
 // Local scope

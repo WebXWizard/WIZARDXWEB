@@ -107,6 +107,7 @@ console.log(square)
 
 
 //filter()
+
 let odd =num.filter((x) => x%2!=0)
 console.log(odd)
 
