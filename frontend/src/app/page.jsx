@@ -1,14 +1,10 @@
-import React from 'react'
+import React from "react";
 
 const page = () => {
-
-
-  //Backend (Other Functions) 
+  //Backend (Other Functions)
   return (
-
     //Frontend or Content of your page---
     <div>
-
       <>
         {/* Hero */}
         <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 mt-4">
@@ -19,7 +15,8 @@ const page = () => {
                 Build Better Products
               </h1>
               <p className="mt-3 text-lg text-gray-800">
-                Introducing a new way for your brand to reach the creative community.
+                Introducing a new way for your brand to reach the creative
+                community.
               </p>
               <div className="mt-5 lg:mt-8 flex flex-col items-center gap-2 sm:flex-row sm:gap-3">
                 <div className="w-full sm:w-auto">
@@ -200,9 +197,8 @@ const page = () => {
         </div>
         {/* End Hero */}
       </>
-
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default page;
