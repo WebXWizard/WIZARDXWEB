@@ -50,6 +50,7 @@ if (true) {
 console.log(num)
 
 console.log("---------------------------")
+
 // Global scope
 var num1 = 10
 console.log(num1)
