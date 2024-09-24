@@ -1,16 +1,16 @@
-console.log("Condtional Statements----")
+console.log("Conditional Statements----")
 
 console.log("-------------")
 
 //--------------
 
 //Types of Conditions--
+
+
 //-if(to check single condition--)
 //-if-else(to check single conditions--)
 //-if-else-if(to check multiple conditions)
 // Ternary--(to check)
-
-
 
 
 // if statements---
