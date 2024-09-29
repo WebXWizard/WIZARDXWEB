@@ -6,7 +6,7 @@ const Navbar = () => {
     <div>
       <>
         {/* Navbar Start */}
-        <nav className=" flex justify-left items-center py-4 bg-stone-900 ">
+        <nav className=" flex justify-center items-center py-4 bg-stone-900 ">
           <div className=" ml-6">
             <img className="" src="" alt="" />
           </div>
@@ -14,21 +14,21 @@ const Navbar = () => {
             <Link className="px-4 hover:border-b-2  border-blue-400" href="/eventHandling">
               Event Handling
             </Link>
-            {/* <a className="px-4 hover:border-b-2  border-blue-400" href="">
-              Services
-            </a>
-            <a className="px-4 hover:border-b-2  border-blue-400" href="">
-              About
-            </a>
-            <a className="px-4 hover:border-b-2  border-blue-400" href="">
+            <Link className="px-4 hover:border-b-2  border-blue-400" href="/counterExample">
+              Counter
+            </Link>
+            <Link className="px-4 hover:border-b-2  border-blue-400" href="/todo">
+              Todo
+            </Link>
+            {/* <Link className="px-4 hover:border-b-2  border-blue-400" href="">
               Schedule
-            </a>
-            <a className="px-4 hover:border-b-2  border-blue-400 " href="">
+            </Link>
+            <Link className="px-4 hover:border-b-2  border-blue-400 " href="">
               Programs
-            </a>
-            <a className="px-4 hover:border-b-2  border-blue-400 " href="">
+            </Link>
+            <Link className="px-4 hover:border-b-2  border-blue-400 " href="">
               Contact
-            </a> */}
+            </Link> */}
           </div>
           <div className=" flex  justify-center items-center ">
             <div className="hidden lg:flex justify-center items-center mr-5">
