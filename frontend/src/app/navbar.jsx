@@ -20,7 +20,7 @@ const Navbar = () => {
             <Link className="px-4 hover:border-b-2  border-blue-400" href="/todo">
               Todo
             </Link>
-            {/* <Link className="px-4 hover:border-b-2  border-blue-400" href="">
+            <Link className="px-4 hover:border-b-2  border-blue-400" href="">
               Schedule
             </Link>
             <Link className="px-4 hover:border-b-2  border-blue-400 " href="">
@@ -28,7 +28,7 @@ const Navbar = () => {
             </Link>
             <Link className="px-4 hover:border-b-2  border-blue-400 " href="">
               Contact
-            </Link> */}
+            </Link>
           </div>
           <div className=" flex  justify-center items-center ">
             <div className="hidden lg:flex justify-center items-center mr-5">

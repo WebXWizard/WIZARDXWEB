@@ -4,12 +4,19 @@ import React,{useState} from 'react'
 const TodoList = () => {
 
   const [todoList, setTodoList] =useState([])
+  
   const addNewTodo = (e) => {
     if(e.code === "Enter" && e.target.value.trim() != ""){
       setTodoList([...todoList , e.target.value])
       console.log(todoList)
       e.target.value =""
     }
+  }
+  const removeTodo = (index) => {
+      console.log(index);
+      const temp = todoList
+      temp.splice(index,1)
+      setTodoList([...temp])
   }
 
   return (
@@ -28,7 +35,7 @@ const TodoList = () => {
           todoList.map((todo, index) => (
             <div key={index} className='flex justify-between items-center mb-3 p-2 rounded-lg bg-green-300'>
               <h4 className='text-lg font-semibold text-gray-800'>{todo}</h4>
-              <button className='bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded-lg'>Delete</button>
+              <button className='bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-3 rounded-lg' onClick={() => removeTodo(index)}>Delete</button>
               
             </div>
 
