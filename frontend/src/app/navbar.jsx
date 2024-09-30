@@ -11,8 +11,11 @@ const Navbar = () => {
             <img className="" src="" alt="" />
           </div>
           <div className="font-semibold  text-lg text-white  lg:flex justify-between items-center">
+            <Link className="px-4 hover:border-b-2  border-blue-400" href="/">
+              Home
+            </Link>
             <Link className="px-4 hover:border-b-2  border-blue-400" href="/eventHandling">
-              Event Handling
+              EventHandling
             </Link>
             <Link className="px-4 hover:border-b-2  border-blue-400" href="/counterExample">
               Counter
@@ -20,14 +23,14 @@ const Navbar = () => {
             <Link className="px-4 hover:border-b-2  border-blue-400" href="/todo">
               Todo
             </Link>
-            <Link className="px-4 hover:border-b-2  border-blue-400" href="">
-              Schedule
+            <Link className="px-4 hover:border-b-2  border-blue-400" href="/signup">
+              SignUp
+            </Link>
+            <Link className="px-4 hover:border-b-2  border-blue-400 " href="/login">
+              Login
             </Link>
             <Link className="px-4 hover:border-b-2  border-blue-400 " href="">
-              Programs
-            </Link>
-            <Link className="px-4 hover:border-b-2  border-blue-400 " href="">
-              Contact
+              ContactUs
             </Link>
           </div>
           <div className=" flex  justify-center items-center ">
