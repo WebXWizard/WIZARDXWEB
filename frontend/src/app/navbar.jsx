@@ -23,7 +23,7 @@ const Navbar = () => {
             <Link className="px-4 hover:border-b-2  border-blue-400" href="/todo">
               Todo
             </Link>
-            <Link className="px-4 hover:border-b-2  border-blue-400" href="/signup">
+            <Link className="px-4 hover:border-b-2  border-blue-400" href="/signUp">
               SignUp
             </Link>
             <Link className="px-4 hover:border-b-2  border-blue-400 " href="/login">
