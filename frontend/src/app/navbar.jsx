@@ -40,16 +40,16 @@ const Navbar = () => {
                 type="text"
                 placeholder=" Search Anything "
               />
-              {/* <button className="border-2 p-1  rounded-e-lg border-blue-600 bg-orange-400">
+              <button className="border-2 p-1  rounded-e-lg border-blue-600 bg-orange-400">
                 <i className="fa-solid fa-magnifying-glass "></i>
-              </button> */}
+              </button>
             </div>
-            {/* <div className="lg:hidden mr-10">
+            <div className="lg:hidden mr-10">
               <i className="fa-solid fa-magnifying-glass "></i>
             </div>
             <div className="lg:hidden mr-10">
               <i className="fa-solid fa-bars" />
-            </div> */}
+            </div>
           </div>
         </nav>
         {/* Nav Done */}
