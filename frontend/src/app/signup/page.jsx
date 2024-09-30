@@ -10,10 +10,10 @@ const SignUp = () => {
       email: "",
       password: "",
     },
-    onSubmit: (values, {resetForm}) => {
-      console.log(values)
-      resetForm()
-    }
+    onSubmit: (values, { resetForm }) => {
+      console.log(values);
+      resetForm();
+    },
   });
   return (
     <div>
@@ -80,12 +80,11 @@ const SignUp = () => {
                     </label>
                     <input
                       type="text"
-                     
                       className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                       placeholder="Full name"
-                       id="name"
-                       onChange={signUpForm.handleChange}
-                       value={signUpForm.values.name}
+                      id="name"
+                      onChange={signUpForm.handleChange}
+                      value={signUpForm.values.name}
                     />
                   </div>
                   <div className="mb-4">
@@ -97,7 +96,6 @@ const SignUp = () => {
                     </label>
                     <input
                       type="email"
-                      
                       className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                       placeholder="Email address"
                       id="email"
@@ -114,7 +112,6 @@ const SignUp = () => {
                     </label>
                     <input
                       type="password"
-                      
                       className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                       placeholder="Password"
                       id="password"
