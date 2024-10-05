@@ -1,21 +1,34 @@
-'use client'
+"use client";
 import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import toast from "react-hot-toast";
 
+const loginSchema = Yup.object().shape({
+  email: Yup.string()
+    .email("Please enter a valid email address")
+    .required("Email is required"),
 
+  password: Yup.string()
+    .min(8, "Password must be at least 8 characters")
+    .matches(/[a-z]/, "Password must contain at least one lowercase letter")
+    .matches(/[A-Z]/, "Password must contain at least one uppercase letter")
+    .matches(/[0-9]/, "Password must contain at least one number")
+    .required("Password is required"),
+});
 const Login = () => {
-
   const loginForm = useFormik({
     initialValues: {
       email: "",
       password: "",
       // confirmPassword:"",
     },
-    onSubmit: (values, {resetForm}) => {
-      console.log(values)
-      resetForm()
-    }
+    onSubmit: (values, { resetForm }) => {
+      console.log(values);
+      resetForm();
+      toast.success("Login Successfully");
+    },
+    validationSchema: loginSchema,
   });
   return (
     <div>
@@ -68,13 +81,18 @@ const Login = () => {
               Or
             </div>
             {/* Form */}
-            <form onSubmit={loginForm.handleSubmit} >
+            <form onSubmit={loginForm.handleSubmit}>
               <div className="grid gap-y-4">
                 {/* Form Group */}
                 <div>
                   <label htmlFor="email" className="block text-sm mb-2">
                     Email address
                   </label>
+                  {loginForm.errors.email && loginForm.touched.email ? (
+                    <div className="text-red-500 text-sm">
+                      {loginForm.errors.email}
+                    </div>
+                  ) : null}
                   <div className="relative">
                     <input
                       type="email"
@@ -114,16 +132,20 @@ const Login = () => {
                     Password
                   </label>
                   <div className="relative">
+                    {loginForm.errors.password && loginForm.touched.password ? (
+                      <div className="text-red-500 text-sm">
+                        {loginForm.errors.password}
+                      </div>
+                    ) : null}
                     <input
                       type="password"
-                 
                       name="password"
                       className="py-3 px-4 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none"
                       required=""
                       aria-describedby="password-error"
-                           id="password"
-                           onChange={loginForm.handleChange}
-                           value={loginForm.values.password}
+                      id="password"
+                      onChange={loginForm.handleChange}
+                      value={loginForm.values.password}
                     />
                     <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                       <svg
@@ -214,7 +236,7 @@ const Login = () => {
                   type="submit"
                   className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
                 >
-                  Sign up
+                  Sign in
                 </button>
               </div>
             </form>

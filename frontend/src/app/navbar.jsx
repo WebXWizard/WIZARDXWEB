@@ -29,8 +29,11 @@ const Navbar = () => {
             <Link className="px-4 hover:border-b-2  border-blue-400 " href="/login">
               Login
             </Link>
-            <Link className="px-4 hover:border-b-2  border-blue-400 " href="">
+            <Link className="px-4 hover:border-b-2  border-blue-400 " href="/contact">
               ContactUs
+            </Link>
+            <Link className="px-4 hover:border-b-2  border-blue-400 " href="/productListing">
+              Product
             </Link>
           </div>
           <div className=" flex  justify-center items-center ">
