@@ -1,12 +1,16 @@
+
+// For Express initial
+
 const express = require('express');
 const app = express();
 
 
-// For Express initial
-
-const port = 5000
 
 
+const port = 5000  // Port Number 
+
+
+//Routing ---
 
 app.get('/', (req,res) => {
     res.send("Hello World")
