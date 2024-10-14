@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Model = require('../models/user');
+const Model = require('../models/product');
 const { model } = require('mongoose');
 
 router.post('/add', (req,res) => {
@@ -15,10 +15,8 @@ router.post('/add', (req,res) => {
         res.status(500).json({error: 'Internal Server Error'})
     });
 })
-
 router.get('/getall', (req,res) => {
-    // empty brackets means get all data
-    Model.find()
+    Model.find({})
     .then((result) => {
         res.json(result);
     }).catch((err) => {
@@ -26,6 +24,8 @@ router.get('/getall', (req,res) => {
         res.status(500).json(err);
     });
 })
+
+
 
 
 
