@@ -6,4 +6,4 @@ const productSchema = new Schema({
     description:String
 });
 
-module.exports = model('user', productSchema)
+module.exports = model('product', productSchema)
