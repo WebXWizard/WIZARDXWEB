@@ -35,6 +35,12 @@ const Navbar = () => {
             <Link className="px-4 hover:border-b-2  border-blue-400 " href="/productListing">
               Product
             </Link>
+            <Link className="px-4 hover:border-b-2  border-blue-400 " href="/addProduct">
+              AddProduct
+            </Link>
+            <Link className="px-4 hover:border-b-2  border-blue-400 " href="/manageUser">
+              ManageUser
+            </Link>
           </div>
           <div className=" flex  justify-center items-center ">
             <div className="hidden lg:flex justify-center items-center mr-5">
