@@ -3,6 +3,8 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+
 
 
 const loginSchema = Yup.object().shape({
@@ -18,6 +20,8 @@ const loginSchema = Yup.object().shape({
     .required("Password is required"),
 });
 const Login = () => {
+  const router = useRouter()
+  
   const loginForm = useFormik({
     initialValues: {
       email: "",
@@ -28,6 +32,8 @@ const Login = () => {
       console.log(values);
       resetForm();
       toast.success("Login Successfully");
+      router.push('/login')
+
     },
     validationSchema: loginSchema,
   });
@@ -36,7 +42,7 @@ const Login = () => {
       <div className="mt-7 bg-white border border-gray-200 rounded-xl shadow-sm">
         <div className="p-4 sm:p-7">
           <div className="text-center">
-            <h1 className="block text-2xl font-bold text-gray-800">Sign up</h1>
+            <h1 className="block text-2xl font-bold text-gray-800">Sign In</h1>
             <p className="mt-2 text-sm text-gray-600">
               Already have an account?
               <a
