@@ -3,366 +3,212 @@ import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import toast from "react-hot-toast";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
-const contactSchema = Yup.object().shape({
-  firstName: Yup.string()
-    .required("Fill your FirstName")
-    .min(3, "Name must be at least 3 characters")
-    .max(15, "Name must be at most 15 characters"),
-
-  //   lastName: Yup.string()
-  //     .required("LastName is required")
-  //     .min(3, "Name must be at least 3 characters")
-  //     .max(15, "Name must be at most 15 characters"),
+const ContactSchema = Yup.object().shape({
+  name: Yup.string()
+    .min(2, "Name must be at least 2 characters")
+    .max(50, "Name must be at most 50 characters")
+    .required("Name is required"),
 
   email: Yup.string()
-    .email("please enter a valid email address")
+    .email("Please enter a valid email address")
     .required("Email is required"),
 
-  phoneNumber: Yup.string()
-    .min(10, "min 10 numbers")
-    .max(12, "max 10 numbers")
-    .required("Phone number is required"),
-
-  //   password: Yup.string()
-  //     .min(8, "Password must be at least 8 character")
-  //     .matches(/[a-z]/, "Password must contain at least one lowercase letter")
-  //     .matches(/[A-Z]/, "Password must contain at least one uppercase")
-  //     .matches(/0-9]/, "Password must contain at least one number")
-  //     .matches(
-  //       /[!@#$%^&*()<>?"":{}[]]/,
-  //       "Password must contain at least one spacial letter"
-  //     )
-  //     .required("password is required"),
-
-  details: Yup.string()
-    .min(10, " Details must be at least 10 characters")
-    .max(80, " Details must be at least 80 characters"),
+  phone: Yup.number()
+    .typeError("That doesn't look like a phone number")
+    .positive("A phone number can't start with a minus")
+    .integer("A phone number can't include a decimal point")
+    .min(8)
+    .required("A phone number is required"),
 });
+
 const ContactUs = () => {
-  const contactUsForm = useFormik({
+  const router = useRouter();
+  const contactForm = useFormik({
     initialValues: {
-      firstName: "",
-      //   lastName: "",
+      name: "",
       email: "",
-      phoneNumber: "",
-      details: "",
+      phone: "",
+      details: " ",
     },
     onSubmit: (values, { resetForm }) => {
       console.log(values);
-      resetForm();
-      toast.success("Form Filled Successfully");
+      axios
+        .post("http://localhost:5000/contact/add", values)
+        .then((response) => {
+          console.log(response.status);
+          resetForm();
+          toast.success("Response sent Successfully");
+          router.push("/");
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error("Failed to send Response");
+        });
     },
-    validationSchema: contactSchema,
+    validationSchema: ContactSchema,
   });
+
   return (
-    <>
-      {/* Contact Us */}
-      <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        <div className="max-w-xl mx-auto">
-          <div className="text-center">
-            <h1 className="text-3xl font-bold">Contact us</h1>
-            <p className="mt-1 text-xl">
-              We'd love to talk about how we can help you.
-            </p>
-          </div>
-        </div>
-        <div className="mt-12 max-w-lg mx-auto">
-          {/* Card */}
-          <div className="flex flex-col border rounded-xl p-4 sm:p-6 lg:p-8 dark:border-neutral-700">
-            {/* <h2 className="mb-8 text-2xl font-semibold">
-              Contact Form
-            </h2> */}
-            <form onSubmit={contactUsForm.handleSubmit}>
-              <div className="grid gap-4 lg:gap-6">
-                {/* Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
-                  <div>
-                    <label
-                      htmlFor="hs-fName-contacts-1"
-                      className="block mb-2 text-sm"
-                    >
-                      Full Name
-                    </label>
-                    {contactUsForm.errors.firstName &&
-                    contactUsForm.touched.firstName ? (
-                      <div className="text-red-500">
-                        {contactUsForm.errors.firstName}
-                      </div>
-                    ) : null}
-                    <input
-                      type="text"
-                      name="firstName"
-                      id="hs-fName-contacts-1"
-                      onChange={contactUsForm.handleChange}
-                      value={contactUsForm.values.firstName}
-                      className="py-3 px-4 block w-full border-2 border-gray-200 rounded-lg text-sm"
-                    />
-                  </div>
-                  {/* <div>
-                    <label
-                      htmlFor="hs-lName-contacts-1"
-                      className="block mb-2 text-sm"
-                    >
-                      Last Name
-                    </label>
-                    <input
-                      type="text"
-                      name="hs-lName-contacts-1"
-                      id="hs-lName-contacts-1"
-                      onChange={contactUsForm.handleChange}
-                      value={contactUsForm.values.firstName}
-                      className="py-3 px-4 block w-full border-2 border-gray-200  rounded-lg text-sm"
-                    />
-                    {contactUsForm.errors.lastName &&
-                    contactUsForm.touched.lastName ? (
-                      <div className="text-red-500">
-                        {contactUsForm.errors.lastName}
-                      </div>
-                    ) : null}
-                  </div> */}
+    <div className="rounded-xl via-transparent">
+      <div className="mt-1 max-w-5xl max-lg:max-w-3xl mx-auto rounded-lg ">
+        <div className="grid md:grid-cols-2 gap-8 lg:gap-16 lg:grid-cols-2 sm:p-8 p-4 font-[sans-serif] ">
+          {/* Form Start */}
+          <div className="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-2xl shadow-md dark:bg-gray-800 ">
+            <div className="px-8 py-12 ">
+              <div className="flex justify-center mx-auto ">
+                <img
+                  className="w-auto h-7 sm:h-8"
+                  src="https://merakiui.com/images/logo.svg"
+                  alt=""
+                />
+              </div>
+              <h3 className="mt-2 text-3xl font-medium text-center text-gray-600 dark:text-gray-200">
+                Contact Us
+              </h3>
+              <form onSubmit={contactForm.handleSubmit}>
+                <div className="w-full mt-4">
+                  <label className="block mb-2 text-xl"> </label>
+                  {contactForm.errors.name && contactForm.touched.name ? (
+                    <div className="text-red-500 text-sm">
+                      {contactForm.errors.name}
+                    </div>
+                  ) : null}
+                  <input
+                    className="block w-full px-4 py-2 mt-2 text-white placeholder-gray-500 bg-white border rounded-lg dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
+                    type="text"
+                    placeholder="Your Name"
+                    aria-label="Enter Your Name "
+                    id="name"
+                    onChange={contactForm.handleChange}
+                    value={contactForm.values.name}
+                  />
                 </div>
-                {/* End Grid */}
-                {/* Grid */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6">
-                  <div>
-                    <label
-                      htmlFor="hs-email-contacts-1"
-                      className="block mb-2 text-sm"
-                    >
-                      Email
-                    </label>
-                    {contactUsForm.errors.email &&
-                    contactUsForm.touched.email ? (
-                      <div className="text-red-500">
-                        {contactUsForm.errors.email}
-                      </div>
-                    ) : null}
-                    <input
-                      type="email"
-                      name="email"
-                      id="hs-email-contacts-1"
-                      autoComplete="email"
-                      onChange={contactUsForm.handleChange}
-                      value={contactUsForm.values.email}
-                      className="py-3 px-4 block w-full border-2 border-gray-200 rounded-lg text-sm"
-                    />
-                  </div>
-                  <div>
-                    <label
-                      htmlFor="hs-phone-number-1"
-                      className="block mb-2 text-sm"
-                    >
-                      Phone Number
-                    </label>
-                    {contactUsForm.errors.phoneNumber &&
-                    contactUsForm.touched.phoneNumber ? (
-                      <div className="text-red-500">
-                        {contactUsForm.errors.phoneNumber}
-                      </div>
-                    ) : null}
-                    <input
-                      type="text"
-                      name="phoneNumber"
-                      id="hs-phone-number-1"
-                      onChange={contactUsForm.handleChange}
-                      value={contactUsForm.values.phoneNumber}
-                      className="py-3 px-4 block w-full border-2 border-gray-200 rounded-lg text-sm"
-                    />
-                  </div>
+                <div className="w-full mt-4">
+                  <label className="block mb-2 text-xl "></label>
+                  {contactForm.errors.email && contactForm.touched.email ? (
+                    <div className="text-red-500 text-sm">
+                      {contactForm.errors.email}
+                    </div>
+                  ) : null}
+                  <input
+                    className="block w-full px-4 py-2 mt-2 text-white placeholder-gray-500 bg-white border rounded-lg dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
+                    type="email"
+                    placeholder="Email Address"
+                    aria-label="Email Address"
+                    id="email"
+                    onChange={contactForm.handleChange}
+                    value={contactForm.values.email}
+                  />
                 </div>
-                {/* End Grid */}
-                <div>
-                  <label
-                    htmlFor="hs-about-contacts-1"
-                    className="block mb-2 text-sm  font-medium"
-                  >
-                    Details
-                  </label>
-                  {contactUsForm.errors.details &&
-                  contactUsForm.touched.details ? (
-                    <div className="text-red-500">
-                      {contactUsForm.errors.details}
+                <div className="w-full mt-4">
+                  <label className="block mb-2 text-xl "></label>
+                  {contactForm.errors.phone && contactForm.touched.phone ? (
+                    <div className="text-red-500 text-sm">
+                      {contactForm.errors.phone}
+                    </div>
+                  ) : null}
+                  <input
+                    className="block w-full px-4 py-2 mt-2 text-white placeholder-gray-500 bg-white border rounded-lg dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
+                    type="number"
+                    placeholder="Enter Your Number"
+                    aria-label="Enter Your Number"
+                    id="phone"
+                    onChange={contactForm.handleChange}
+                    value={contactForm.values.phone}
+                  />
+                </div>
+                <div className="w-full mt-4">
+                  <label className="block mb-2 text-xl "></label>
+                  {contactForm.errors.details && contactForm.touched.details ? (
+                    <div className="text-red-500 text-sm">
+                      {contactForm.errors.details}
                     </div>
                   ) : null}
                   <textarea
-                    id="hs-about-contacts-1"
-                    name="details"
-                    placeholder="Enter Your details"
-                    rows={2}
-                    onChange={contactUsForm.handleChange}
-                    value={contactUsForm.values.details}
-                    className="py-3 px-4 block w-full border-2"
-                    defaultValue={""}
+                    className="block w-full px-4 py-2 mt-2 text-white placeholder-gray-500 bg-white border rounded-lg dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
+                    type="text"
+                    placeholder="Enter Message or Query "
+                    aria-label="Details"
+                    id="details"
+                    onChange={contactForm.handleChange}
+                    value={contactForm.values.details}
                   />
                 </div>
-              </div>
-              {/* End Grid */}
-              <div className="mt-6 grid">
-                <button
-                  type="submit"
-                  className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                >
-                  Send inquiry
-                </button>
-              </div>
-              <div className="mt-3 text-center">
-                <p className="text-sm text-gray-500 dark:text-neutral-500">
-                  We'll get back to you in 1-2 business days.
+
+                <div className="flex items-center justify-center mt-4">
+                  <button className="px-6 w-full py-2 text-md font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-sky-400 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                    Send Enquiry
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+          {/* Form Complete  */}
+          <div>
+            <div className="mt-8 md:mb-8 max-w-2xl hidden md:block ">
+              <h1 className="mb-6 font-semibold text-gray-800 text-3xl lg:text-5xl ">
+                Fully customizable rules to match{" "}
+                <span className="bg-clip-text bg-gradient-to-tl from-blue-500 to-violet-600 text-transparent">
+                  your unique needs
+                </span>
+              </h1>
+              <p className="text-gray-900 text-lg">
+                Have some big idea or brand to develop and need help? Then reach
+                out we'd love to hear about your project and provide help.
+              </p>
+            </div>
+
+            {/* End Title */}
+            {/* Blockquote */}
+            <blockquote className="hidden md:block relative max-w-sm">
+              <svg
+                className="absolute top-0 start-0 transform -translate-x-6 -translate-y-8 size-16 text-gray-200"
+                width={16}
+                height={16}
+                viewBox="0 0 16 16"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                aria-hidden="true"
+              >
+                <path
+                  d="M7.39762 10.3C7.39762 11.0733 7.14888 11.7 6.6514 12.18C6.15392 12.6333 5.52552 12.86 4.76621 12.86C3.84979 12.86 3.09047 12.5533 2.48825 11.94C1.91222 11.3266 1.62421 10.4467 1.62421 9.29999C1.62421 8.07332 1.96459 6.87332 2.64535 5.69999C3.35231 4.49999 4.33418 3.55332 5.59098 2.85999L6.4943 4.25999C5.81354 4.73999 5.26369 5.27332 4.84476 5.85999C4.45201 6.44666 4.19017 7.12666 4.05926 7.89999C4.29491 7.79332 4.56983 7.73999 4.88403 7.73999C5.61716 7.73999 6.21938 7.97999 6.69067 8.45999C7.16197 8.93999 7.39762 9.55333 7.39762 10.3ZM14.6242 10.3C14.6242 11.0733 14.3755 11.7 13.878 12.18C13.3805 12.6333 12.7521 12.86 11.9928 12.86C11.0764 12.86 10.3171 12.5533 9.71484 11.94C9.13881 11.3266 8.85079 10.4467 8.85079 9.29999C8.85079 8.07332 9.19117 6.87332 9.87194 5.69999C10.5789 4.49999 11.5608 3.55332 12.8176 2.85999L13.7209 4.25999C13.0401 4.73999 12.4903 5.27332 12.0713 5.85999C11.6786 6.44666 11.4168 7.12666 11.2858 7.89999C11.5215 7.79332 11.7964 7.73999 12.1106 7.73999C12.8437 7.73999 13.446 7.97999 13.9173 8.45999C14.3886 8.93999 14.6242 9.55333 14.6242 10.3Z"
+                  fill="currentColor"
+                />
+              </svg>
+              <div className="relative z-10">
+                <p className="text-xl italic text-gray-800">
+                  Amazing people to work with. Very fast and professional
+                  partner.
                 </p>
               </div>
-            </form>
+              <footer className="mt-3">
+                <div className="flex items-center gap-x-4">
+                  <div className="shrink-0">
+                    <img
+                      className="size-8 rounded-full"
+                      src="https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=320&h=320&q=80"
+                      alt="Avatar"
+                    />
+                  </div>
+                  <div className="grow">
+                    <div className="font-semibold text-gray-800">
+                      Josh Grazioso
+                    </div>
+                    <div className="text-xs text-gray-500">
+                      Director Payments &amp; Risk | Airbnb
+                    </div>
+                  </div>
+                </div>
+              </footer>
+            </blockquote>
+            {/* End Blockquote */}
           </div>
-          {/* End Card */}
-        </div>
-        <div className="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 items-center gap-4 lg:gap-8">
-          {/* Icon Block */}
-          <a
-            className="group flex flex-col h-full text-center rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 p-4 sm:p-6 dark:hover:bg-neutral-500/10 dark:focus:bg-neutral-500/10"
-            href="#"
-          >
-            <svg
-              className="size-9 text-gray-800 mx-auto dark:text-neutral-200"
-              xmlns="http://www.w3.org/2000/svg"
-              width={24}
-              height={24}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <circle cx={12} cy={12} r={10} />
-              <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-              <path d="M12 17h.01" />
-            </svg>
-            <div className="mt-5">
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-neutral-200">
-                KnowledgeBase
-              </h3>
-              <p className="mt-1 text-gray-500 dark:text-neutral-500">
-                We're here to help with any questions or code.
-              </p>
-              <p className="mt-5 inline-flex items-center gap-x-1 font-medium text-blue-600 dark:text-blue-500">
-                Contact support
-                <svg
-                  className="shrink-0 size-4 transition ease-in-out group-hover:translate-x-1 group-focus:translate-x-1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
-              </p>
-            </div>
-          </a>
-          {/* End Icon Block */}
-          {/* Icon Block */}
-          <a
-            className="group flex flex-col h-full text-center rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 p-4 sm:p-6 dark:hover:bg-neutral-500/10 dark:focus:bg-neutral-500/10"
-            href="#"
-          >
-            <svg
-              className="size-9 text-gray-800 mx-auto dark:text-neutral-200"
-              xmlns="http://www.w3.org/2000/svg"
-              width={24}
-              height={24}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4c0-1.1.9-2 2-2h8a2 2 0 0 1 2 2v5Z" />
-              <path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1" />
-            </svg>
-            <div className="mt-5">
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-neutral-200">
-                FAQ
-              </h3>
-              <p className="mt-1 text-gray-500 dark:text-neutral-500">
-                Search our FAQ for answers to anything you might ask.
-              </p>
-              <p className="mt-5 inline-flex items-center gap-x-1 font-medium text-blue-600 dark:text-blue-500">
-                Visit FAQ
-                <svg
-                  className="shrink-0 size-4 transition ease-in-out group-hover:translate-x-1 group-focus:translate-x-1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
-              </p>
-            </div>
-          </a>
-          {/* End Icon Block */}
-          {/* Icon Block */}
-          <a
-            className="group flex flex-col h-full text-center rounded-lg hover:bg-gray-100 focus:outline-none focus:bg-gray-100 p-4 sm:p-6 dark:hover:bg-neutral-500/10 dark:focus:bg-neutral-500/10"
-            href="#"
-          >
-            <svg
-              className="size-9 text-gray-800 mx-auto dark:text-neutral-200"
-              xmlns="http://www.w3.org/2000/svg"
-              width={24}
-              height={24}
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="m7 11 2-2-2-2" />
-              <path d="M11 13h4" />
-              <rect width={18} height={18} x={3} y={3} rx={2} ry={2} />
-            </svg>
-            <div className="mt-5">
-              <h3 className="text-lg font-semibold text-gray-800 dark:text-neutral-200">
-                Developer APIs
-              </h3>
-              <p className="mt-1 text-gray-500 dark:text-neutral-500">
-                Check out our development quickStart guide.
-              </p>
-              <p className="mt-5 inline-flex items-center gap-x-1 font-medium text-blue-600 dark:text-blue-500">
-                Contact sales
-                <svg
-                  className="shrink-0 size-4 transition ease-in-out group-hover:translate-x-1 group-focus:translate-x-1"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width={24}
-                  height={24}
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth={2}
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
-              </p>
-            </div>
-          </a>
-          {/* End Icon Block */}
         </div>
       </div>
-      {/* End Contact Us */}
-    </>
+    </div>
   );
 };
 

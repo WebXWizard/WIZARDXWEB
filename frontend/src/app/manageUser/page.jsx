@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import axios from "axios";
-import Link from 'next/link'
+import Link from "next/link";
 
 const ManageUser = () => {
   const fetchUserList = () => {
@@ -23,7 +23,8 @@ const ManageUser = () => {
   }, []);
 
   const deleteUser = (id) => {
-    axios.delete('http://localhost:5000/user/delete/' + id)
+    axios
+      .delete("http://localhost:5000/user/delete/" + id)
       .then((result) => {
         toast.success("User Deleted Successfully");
         fetchUserList();
@@ -61,13 +62,19 @@ const ManageUser = () => {
                   <td className="p-2 border via-violet-300">{user.name} </td>
                   <td className="p-2 border via-violet-300">{user.email} </td>
                   <td className="p-2 border via-violet-300">{user.password}</td>
-                  <td onClick={() => deleteUser(user._id)} className="p-2 border via-violet-300">
+                  <td
+                    onClick={() => deleteUser(user._id)}
+                    className="p-2 border via-violet-300"
+                  >
                     <button className="bg-red-500 text-white px-4 py-2 rounded-lg">
                       Delete
                     </button>
                   </td>
                   <td className="p-2 border via-violet-300">
-                    <Link href={`/updateUser/` + user._id} className="bg-blue-500 text-white px-4 py-2 rounded-lg">
+                    <Link
+                      href={`/updateUser/` + user._id}
+                      className="bg-blue-500 text-white px-4 py-2 rounded-lg"
+                    >
                       Update
                     </Link>
                   </td>

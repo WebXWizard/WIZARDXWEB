@@ -2,15 +2,14 @@
 import React from "react";
 import { useFormik } from "formik";
 import toast from "react-hot-toast";
-import axios from 'axios'
+import axios from "axios";
 
 const AddProduct = () => {
-
   const productForm = useFormik({
-
     initialValues: {
       name: "",
       price: "",
+      image:" ",
       category: "",
       description: "",
     },
@@ -74,7 +73,6 @@ const AddProduct = () => {
 
                 <input
                   className="w-full bg-gray-100 border rounded py-3 px-4 mb-3"
-                
                   type="text"
                   placeholder=""
                   id="price"
@@ -98,7 +96,6 @@ const AddProduct = () => {
                 ) : null}
                 <input
                   className="w-full bg-gray-100 border rounded py-3 px-4 mb-3"
-                  
                   type="text"
                   placeholder=""
                   id="category"
@@ -123,7 +120,6 @@ const AddProduct = () => {
                 ) : null}
                 <input
                   className="w-full bg-gray-100 border rounded py-3 px-4 mb-3"
-                
                   type="text"
                   placeholder=""
                   id="description"
@@ -132,6 +128,27 @@ const AddProduct = () => {
                 />
               </div>
             </div>
+            <div>
+              <label
+                style={{ fontFamily: "" }}
+                htmlFor="category"
+                className="text-xl font-semibold mb-2"
+              >
+                Image URL
+              </label>
+              <div className="mt-2">
+                <input
+                  id="image"
+                  value={productForm.values.image}
+                  onChange={productForm.handleChange}
+                  type="text"
+                  autoComplete="category"
+                  required=""
+                  className=" w-full bg-gray-100 border rounded py-3 px-4 mb-3"
+                />
+              </div>
+            </div>
+
             <button
               type="submit"
               className="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-lg font-semibold rounded-lg border border-transparent bg-blue-300 text-white hover:bg-sky-500 "
