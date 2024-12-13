@@ -1,10 +1,11 @@
-"use client";
-import React from "react";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import toast from "react-hot-toast";
-import { useRouter } from "next/navigation";
-
+'use client'
+import React from 'react'
+import {useFormik} from 'formik'
+import * as Yup from 'yup'
+import toast from 'react-hot-toast'
+import axios from 'axios'
+import {useRouter} from 'next/navigation'
+import useAppContext from '@/context/appContext'
 
 
 const loginSchema = Yup.object().shape({
@@ -20,8 +21,9 @@ const loginSchema = Yup.object().shape({
     .required("Password is required"),
 });
 const Login = () => {
-  const router = useRouter()
-  
+  const {setLoggedIn, setCurrentUser} = useAppContext();
+  const router = useRouter();
+
   const loginForm = useFormik({
     initialValues: {
       email: "",
@@ -30,10 +32,20 @@ const Login = () => {
     },
     onSubmit: (values, { resetForm }) => {
       console.log(values);
-      resetForm();
-      toast.success("Login Successfully");
-      router.push('/login')
-
+      axios
+        .post("http://localhost:5000/user/authenticate", values)
+        .then((response) => {
+          console.log(response.status);
+          localStorage.setItem('user', JSON.stringify(response.data))
+          setLoggedIn(true)
+          resetForm();
+          toast.success("Login Successfully");
+          router.push("/");
+        })
+        .catch((err) => {
+          console.log(err);
+          toast.error("Invalid Credentials");
+        });
     },
     validationSchema: loginSchema,
   });

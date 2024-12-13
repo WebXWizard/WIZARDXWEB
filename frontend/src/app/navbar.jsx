@@ -1,70 +1,144 @@
+"use client";
 import React from "react";
-import Link from 'next/link'        
+import Link from "next/link";
+import useAppContext from "@/context/appContext";
 
-const Navbar = () => {
+const UserNavbar = () => {
+  const { loggedIn, logout } = useAppContext();
+
   return (
     <div>
       <>
-        {/* Navbar Start */}
-        <nav className=" flex justify-center items-center py-4 bg-stone-900 ">
-          <div className=" ml-6">
-            <img className="" src="" alt="" />
-          </div>
-          <div className="font-semibold  text-lg text-white  lg:flex justify-between items-center">
-            <Link className="px-4 hover:border-b-2  border-blue-400" href="/">
-              Home
-            </Link>
-            {/* <Link className="px-4 hover:border-b-2  border-blue-400" href="/eventHandling">
-              EventHandling
-            </Link> */}
-            {/* <Link className="px-4 hover:border-b-2  border-blue-400" href="/counterExample">
-              Counter
-            </Link> */}
-            <Link className="px-4 hover:border-b-2  border-blue-400" href="/todo">
-              Todo
-            </Link>
-            <Link className="px-4 hover:border-b-2  border-blue-400" href="/signUp">
-              SignUp
-            </Link>
-            <Link className="px-4 hover:border-b-2  border-blue-400 " href="/login">
-              Login
-            </Link>
-            <Link className="px-4 hover:border-b-2  border-blue-400 " href="/contact">
-              ContactUs
-            </Link>
-            <Link className="px-4 hover:border-b-2  border-blue-400 " href="/productListing">
-              DummyProduct
-            </Link>
-            <Link className="px-4 hover:border-b-2  border-blue-400 " href="/addProduct">
-              AddProduct
-            </Link>
-            {/* <Link className="px-4 hover:border-b-2  border-blue-400 " href="/manageUser">
-              ManageUser
-            </Link> */}
-          </div>
-          {/* <div className=" flex  justify-center items-center "> */}
-            <div className="hidden lg:flex justify-center items-center mr-5">
-              <input
-                className="max-w-md p-1 pl-2 mr-0 border-2  border-blue-600 rounded-lg "
-                type="text"
-                placeholder=" Search Anything "
-              />
-              <button className="border-2 p-1  rounded-e-lg border-blue-600 bg-orange-400">
-                <i className="fa-solid fa-magnifying-glass "></i>
-              </button>
+        {/* ========== HEADER ========== */}
+        <header className="flex flex-wrap  md:justify-start md:flex-nowrap z-50 w-full bg-white border-b border-gray-200">
+          <nav className="relative max-w-[85rem] w-full mx-auto md:flex md:items-center md:justify-between md:gap-3 py-2 px-4 sm:px-6 lg:px-8">
+            <div className="flex justify-between items-center gap-x-1">
+              <Link
+                className="flex-none font-semibold text-xl text-black focus:outline-none focus:opacity-80"
+                href="/"
+                aria-label="Brand"
+              >
+                Brand
+              </Link>
             </div>
-            <div className="lg:hidden mr-10">
-              <i className="fa-solid fa-magnifying-glass "></i>
+            {/* Collapse */}
+            <div
+              id="hs-header-base"
+              className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow md:block "
+              aria-labelledby="hs-header-base-collapse"
+            >
+              <div className="overflow-hidden overflow-y-auto max-h-[75vh] [&::-webkit-scrollbar]:w-2 [&::-webkit-scrollbar-thumb]:rounded-full [&::-webkit-scrollbar-track]:bg-gray-100 [&::-webkit-scrollbar-thumb]:bg-gray-300">
+                <div className="py-2 md:py-0  flex flex-col md:flex-row md:items-center gap-0.5 md:gap-1">
+                  <div className="grow">
+                    <div className="flex flex-col md:flex-row  md:items-center gap-0.5 md:gap-1">
+                      <Link
+                        className="p-2 flex items-center text-sm bg-gray-100 text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100"
+                        href="/about"
+                        aria-current="page"
+                      >
+                        About
+                      </Link>
+                      <Link
+                        className="p-2 flex items-center text-sm bg-gray-100 text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100"
+                        href="/eventHandling"
+                        aria-current="page"
+                      >
+                        Event Handling
+                      </Link>
+                      <Link
+                        className="p-2 flex items-center text-sm bg-gray-100 text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100"
+                        href="/counterExample"
+                        aria-current="page"
+                      >
+                        CounterExample
+                      </Link>
+                      <Link
+                        className="p-2 flex items-center text-sm bg-gray-100 text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100"
+                        href="/todo"
+                        aria-current="page"
+                      >
+                        Todo
+                      </Link>
+                      <Link
+                        className="p-2 flex items-center text-sm bg-gray-100 text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100"
+                        href="/addProduct"
+                        aria-current="page"
+                      >
+                        AddProduct
+                      </Link>
+                      <Link
+                        className="p-2 flex items-center text-sm bg-gray-100 text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100"
+                        href="/browse"
+                        aria-current="page"
+                      >
+                        Browse
+                      </Link>
+                      <Link
+                        className="p-2 flex items-center text-sm bg-gray-100 text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100"
+                        href="/contact"
+                        aria-current="page"
+                      >
+                        Contact
+                      </Link>
+                      <Link
+                        className="p-2 flex items-center text-sm bg-gray-100 text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100"
+                        href="/fileUploading"
+                        aria-current="page"
+                      >
+                        FileUpload
+                      </Link>
+                      <Link
+                        className="p-2 flex items-center text-sm bg-gray-100 text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100"
+                        href="/productListing"
+                        aria-current="page"
+                      >
+                        DummyData
+                      </Link>
+                      <Link
+                        className="p-2 flex items-center text-sm bg-gray-100 text-gray-800 hover:bg-gray-100 rounded-lg focus:outline-none focus:bg-gray-100"
+                        href="/manageUser"
+                        aria-current="page"
+                      >
+                        ManageUser
+                      </Link>
+                    </div>
+                  </div>
+                  {/* Button Group */}
+                  {loggedIn ? (
+                    <div className="md:ms-auto mt-2 md:mt-0 flex flex-wrap items-center gap-x-1.5">
+                      <button
+                        className="py-[7px] px-2.5 inline-flex items-center font-medium text-sm rounded-lg bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                        onClick={logout}
+                      >
+                        Logout
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="md:ms-auto mt-2 md:mt-0 flex flex-wrap items-center gap-x-1.5">
+                      <Link
+                        className="py-[7px] px-2.5 inline-flex items-center font-medium text-sm rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-gray-100"
+                        href="/login"
+                      >
+                        Login
+                      </Link>
+                      <Link
+                        className="py-2 px-2.5 inline-flex items-center font-medium text-sm rounded-lg bg-blue-600 text-white hover:bg-blue-700 focus:outline-none focus:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                        href="/signUp"
+                      >
+                        Register
+                      </Link>
+                    </div>
+                  )}
+                </div>
+              </div>
             </div>
-            <div className="lg:hidden mr-10">
-              <i className="fa-solid fa-bars" />
-            </div>
-          {/* </div> */}
-        </nav>
-        {/* Nav Done */}
+            {/* End Collapse */}
+          </nav>
+        </header>
+        {/* ========== END HEADER ========== */}
       </>
     </div>
   );
 };
 
-export default Navbar;
+export default UserNavbar;

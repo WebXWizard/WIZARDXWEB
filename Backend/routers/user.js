@@ -42,7 +42,7 @@ router.get("/getbyid/:id", (req, res) => {
 });
 
 router.get("/getbyemail/:email", (req, res) => {
-  Model.find({email:req.params.email})
+  Model.find({ email: req.params.email })
     .then((result) => {
       res.json(result);
     })
@@ -61,12 +61,12 @@ router.delete("/delete/:id", (req, res) => {
       console.log(err);
       res.status(500).json({ error: "Internal Server Error" });
     });
-})
+});
 
 router.put("/update/:id", (req, res) => {
-//new:true is used to get the updated data
+  //new:true is used to get the updated data
 
-  Model.findByIdAndUpdate(req.params.id , req.body, {new:true})
+  Model.findByIdAndUpdate(req.params.id, req.body, { new: true })
     .then((result) => {
       res.status(200).json(result);
     })
@@ -74,5 +74,18 @@ router.put("/update/:id", (req, res) => {
       console.log(err);
       res.status(500).json({ error: "Internal Server Error" });
     });
-})
+});
+
+router.post("/authenticate", (req, res) => {
+  Model.findOne(req.body)
+    .then((result) => {
+      if (result) res.json(result);
+      else res.status(400).json({ message: "Login Failed" });
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).json(err);
+    });
+});
+
 module.exports = router;
