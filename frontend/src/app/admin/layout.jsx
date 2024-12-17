@@ -1,7 +1,10 @@
 "use client";
 import localFont from "next/font/local";
-import "./globals.css";
+// import "./globals.css";
 import { Toaster, ToastBar } from "react-hot-toast";
+// import AdminNav from "./navbar";
+import Sidebar from "./sidebar";
+// import { AppProvider } from "@/context/appContext";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -25,6 +28,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        {/* <AppProvider> */}
+        <Sidebar />
+
         <Toaster>
           {(t) => (
             <ToastBar
@@ -40,6 +46,8 @@ export default function RootLayout({ children }) {
         </Toaster>
 
         {children}
+        {/* <Footer /> */}
+        {/* </AppProvider> */}
       </body>
     </html>
   );

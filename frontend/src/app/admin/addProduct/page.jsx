@@ -9,7 +9,7 @@ const AddProduct = () => {
     initialValues: {
       name: "",
       price: "",
-      image:" ",
+      image: " ",
       category: "",
       description: "",
     },

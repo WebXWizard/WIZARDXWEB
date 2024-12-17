@@ -43,7 +43,7 @@ const SignUp = () => {
         console.log(response.status)
         resetForm()
         toast.success("User Added Successfully")
-        router.push('/login')
+        router.push('/user/login')
       }).catch((err) => {
         console.log(err)
         toast.error("Failed to add User")

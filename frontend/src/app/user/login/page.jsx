@@ -40,7 +40,7 @@ const Login = () => {
           setLoggedIn(true)
           resetForm();
           toast.success("Login Successfully");
-          router.push("/");
+          router.push("/user");
         })
         .catch((err) => {
           console.log(err);

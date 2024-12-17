@@ -38,7 +38,7 @@ const ManageUser = () => {
   const [userList, setUserList] = useState([]);
 
   return (
-    <div className="lg:max-w-[80%] mx-auto py-10">
+    <div className="lg:max-w-[90%] mx-auto py-10 font-[sans-serif] ">
       <div className="border rounded-xl shadow-lg p-8 ">
         <h1 className="text-center font-bold text-3xl">Manage User</h1>
         {/* <hr/> */}
@@ -72,7 +72,7 @@ const ManageUser = () => {
                   </td>
                   <td className="p-2 border via-violet-300">
                     <Link
-                      href={`/updateUser/` + user._id}
+                      href={`/admin/updateUser/` + user._id}
                       className="bg-blue-500 text-white px-4 py-2 rounded-lg"
                     >
                       Update

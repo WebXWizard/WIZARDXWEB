@@ -35,7 +35,7 @@ router.get("/getall", (req, res) => {
         console.log(err);
         res.status(500).json({ error: "Internal Server Error" });
       });
-      
+
     router.delete("/delete/:id", (req, res) => {
       Model.findByIdAndDelete(req.params.id)
         .then((result) => {
