@@ -5,6 +5,7 @@ import Link from "next/link";
 
 const Browse = () => {
   const [product, setProduct] = useState([]);
+  const [filterProduct, setFilterProduct] = useState([])
 
   const fetchProduct = async () => {
     const res = await fetch("http://localhost:5000/product/getall");
@@ -17,6 +18,7 @@ const Browse = () => {
       // const data = await res.json();
       console.log(data);
       setProduct(data);
+      setFilterProduct(data)
     }
   };
   useEffect(() => {
@@ -64,6 +66,17 @@ const Browse = () => {
       })
     );
   };
+
+  // For Filtering of Products By Category
+
+  const filterBYCategory = (product) => {
+    console.log(product);
+    const filteredProduct = filterProduct.filter(col => col.category.toLowerCase().includes(product.toLowerCase()))
+    setProduct(filteredProduct)
+  }
+
+
+
 
   return (
     <div className="font-[sans-serif]">
@@ -185,9 +198,9 @@ const Browse = () => {
                   {/* End SVG Element */}
                 </div>
                 <div className="mt-8 sm:mt-10">
-                  <a
+                  <button
                     className="m-1 py-3 px-4 inline-flex items-center gap-x-2 text-md font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
-                    href="#"
+                    onClick={(e) => filterBYCategory('Business Laptops')}
                   >
                     <svg
                       className="shrink-0 size-4"
@@ -205,10 +218,11 @@ const Browse = () => {
                       <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
                     </svg>
                     Business Laptops
-                  </a>
-                  <a
+                  </button>
+                  <button
                     className="m-1 py-3 px-4 inline-flex items-center gap-x-2 text-md font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
-                    href="#"
+                    onClick={(e) => filterBYCategory('Replacement')}
+
                   >
                     <svg
                       className="shrink-0 size-4"
@@ -226,10 +240,11 @@ const Browse = () => {
                       <circle cx={12} cy={12} r={3} />
                     </svg>
                     Replacement
-                  </a>
-                  <a
+                  </button>
+                  <button
                     className="m-1 py-3 px-4 inline-flex items-center gap-x-2 text-md font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
-                    href="#"
+                    onClick={(e) => filterBYCategory('Lightweight')}
+
                   >
                     <svg
                       className="shrink-0 size-4"
@@ -246,10 +261,11 @@ const Browse = () => {
                       <path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z" />
                     </svg>
                     Lightweight
-                  </a>
-                  <a
+                  </button>
+                  <button
                     className="m-1 py-3 px-4 inline-flex items-center gap-x-2 text-md font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
-                    href="#"
+                    onClick={(e) => filterBYCategory('Performance')}
+
                   >
                     <svg
                       className="shrink-0 size-4"
@@ -268,10 +284,11 @@ const Browse = () => {
                       <path d="M10 22h4" />
                     </svg>
                     Performance
-                  </a>
-                  <a
+                  </button>
+                  <button
                     className="m-1 py-3 px-4 inline-flex items-center gap-x-2 text-md font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
-                    href="#"
+                    onClick={(e) => filterBYCategory('EveryDay Computing')}
+
                   >
                     <svg
                       className="shrink-0 size-4"
@@ -294,7 +311,7 @@ const Browse = () => {
                       <path d="M10 18h4" />
                     </svg>
                     EveryDay Computing
-                  </a>
+                  </button>
                   {/* <a
                     className="m-1 py-3 px-4 inline-flex items-center gap-x-2 text-md font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 focus:outline-none focus:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
                     href="#"
